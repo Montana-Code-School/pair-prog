@@ -1,0 +1,49 @@
+.poi {
+  background-color:red;
+  width:20em;
+  padding:2em;
+  margin:2em;
+  border-radius:1.5em;
+  float:right;
+  display:block;
+}
+
+.standard {
+  background-color:lightgray;
+  width:20em;
+  padding:2em;
+  margin:2em;
+  border-radius:1.5em;
+  float:left;
+  display:block;
+}
+
+.poi h2 {
+  text-transform:uppercase;
+  color:white !important;
+  background-color:black;
+}
+
+.standard h2 {
+  text-transform:uppercase;
+  color:black !important;
+}
+
+.trial {
+  margin:5em auto;
+  width:60%;
+}
+
+.standard li {
+  background-color:lightgray;
+  border:1px solid black;
+  margin-bottom:1em !important;
+  padding:1em;
+}
+
+.poi li {
+  background-color:tomato;
+  border:1px solid black;
+  margin-bottom:1em !important;
+  padding:1em;
+}
