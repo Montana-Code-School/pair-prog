@@ -1,6 +1,19 @@
 import React from 'react';
 import reactDOM from 'react-dom';
 
+const staticNames = [
+  {personName:"April", pic:"img/april.jpeg"},
+  {personName:"Brigitta", pic:"img/brigitta.jpeg"},
+  {personName:"Chadwick", pic:"img/chadwick.jpeg"},
+  {personName:"David", pic:"img/david.jpeg"},
+  {personName:"Jennifer", pic:"img/jennifer.jpeg"},
+  {personName:"Jesse", pic:"img/jesse.jpeg"},
+  {personName:"John", pic:"img/john.png"},
+  {personName:"Kashya", pic:"img/kashya.jpeg"},
+  {personName:"Meredith", pic:"img/meredith.jpeg"},
+  {personName:"Mike", pic:"img/mike.jpeg"},
+  {personName:"Nani", pic:"img/nani.png"} ];
+
 class InputNames extends React.Component {
   constructor(props) {
     super(props);
@@ -53,7 +66,6 @@ class InputNames extends React.Component {
       this.state.mainArr.push(pairArr);
     }
     this.state.mainArr.push(this.state.allNames);
-    this.state.allNames.splice(0, this.state.allNames.length);
     this.setState({
       mainArr:this.state.mainArr
     });
@@ -62,7 +74,7 @@ class InputNames extends React.Component {
   render() {
     return (
       <div>
-        {this.state.allNames.map((person) => (
+        {staticNames.map((person) => (
           <img className="initialImage" src={person.pic} />
         ))}
         <button type="button" onClick={this.generatePairs.bind(this)}>GENERATE PAIRS</button>

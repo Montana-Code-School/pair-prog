@@ -9572,6 +9572,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var staticNames = [{ personName: "April", pic: "img/april.jpeg" }, { personName: "Brigitta", pic: "img/brigitta.jpeg" }, { personName: "Chadwick", pic: "img/chadwick.jpeg" }, { personName: "David", pic: "img/david.jpeg" }, { personName: "Jennifer", pic: "img/jennifer.jpeg" }, { personName: "Jesse", pic: "img/jesse.jpeg" }, { personName: "John", pic: "img/john.png" }, { personName: "Kashya", pic: "img/kashya.jpeg" }, { personName: "Meredith", pic: "img/meredith.jpeg" }, { personName: "Mike", pic: "img/mike.jpeg" }, { personName: "Nani", pic: "img/nani.png" }];
+
 var InputNames = function (_React$Component) {
   _inherits(InputNames, _React$Component);
 
@@ -9619,7 +9621,6 @@ var InputNames = function (_React$Component) {
         this.state.mainArr.push(pairArr);
       }
       this.state.mainArr.push(this.state.allNames);
-      this.state.allNames.splice(0, this.state.allNames.length);
       this.setState({
         mainArr: this.state.mainArr
       });
@@ -9630,7 +9631,7 @@ var InputNames = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        this.state.allNames.map(function (person) {
+        staticNames.map(function (person) {
           return _react2.default.createElement('img', { className: 'initialImage', src: person.pic });
         }),
         _react2.default.createElement(
