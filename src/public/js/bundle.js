@@ -9586,29 +9586,29 @@ var InputNames = function (_React$Component) {
       name: '',
       allNames: [{ personName: "April", pic: "img/april.jpeg" }, { personName: "Brigitta", pic: "img/brigitta.jpeg" }, { personName: "Chadwick", pic: "img/chadwick.jpeg" }, { personName: "David", pic: "img/david.jpeg" }, { personName: "Jennifer", pic: "img/jennifer.jpeg" }, { personName: "Jesse", pic: "img/jesse.jpeg" }, { personName: "John", pic: "img/john.png" }, { personName: "Kashya", pic: "img/kashya.jpeg" }, { personName: "Meredith", pic: "img/meredith.jpeg" }, { personName: "Mike", pic: "img/mike.jpeg" }, { personName: "Nani", pic: "img/nani.png" }],
       pairArr: [],
-      mainArr: []
+      mainArr: [],
+      bkgdArr: []
     };
     return _this;
   }
 
-  // handleChange(event) {
-  //   const name = event.target.value;
-  //   this.setState({
-  //     name:name
-  //   });
-  // };
-
-  // handleSubmit(event) {
-  //   event.preventDefault();
-  //
-  //   this.state.allNames.push(this.state.name);
-  //   this.setState({
-  //     allNames:this.state.allNames
-  //   });
-  // };
-
-
   _createClass(InputNames, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.repeatingBkgd();
+    }
+  }, {
+    key: 'repeatingBkgd',
+    value: function repeatingBkgd() {
+      for (var i = 0; i < 50; i++) {
+        var randNum = Math.floor(Math.random() * this.state.allNames.length + 0);
+        this.state.bkgdArr.push(staticNames[randNum].pic);
+      }
+      this.setState({
+        bkgdArr: this.state.bkgdArr
+      });
+    }
+  }, {
     key: 'generatePairs',
     value: function generatePairs(event) {
       for (var i = 0; i <= this.state.allNames.length; i++) {
@@ -9630,40 +9630,70 @@ var InputNames = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        null,
-        staticNames.map(function (person) {
-          return _react2.default.createElement('img', { className: 'initialImage', src: person.pic });
-        }),
+        { className: 'generatorPageContainer' },
         _react2.default.createElement(
-          'button',
-          { type: 'button', onClick: this.generatePairs.bind(this) },
-          'GENERATE PAIRS'
+          'div',
+          { className: 'backgroundGrid' },
+          this.state.bkgdArr.map(function (person) {
+            return _react2.default.createElement('img', { className: 'grayImg', src: person });
+          })
         ),
         _react2.default.createElement(
-          'h2',
-          null,
-          'Pairs Generated'
-        ),
-        this.state.mainArr.map(function (pairing) {
-          return _react2.default.createElement(
-            'ul',
-            null,
-            pairing.map(function (coder, i) {
-              return _react2.default.createElement(
-                'li',
-                { key: coder.personName },
-                _react2.default.createElement('img', { className: 'pairedImg', src: [coder.pic] }),
-                _react2.default.createElement(
-                  'p',
-                  null,
-                  [coder.personName]
-                )
-              );
-            })
-          );
-        })
+          'div',
+          { className: 'generator' },
+          _react2.default.createElement(
+            'div',
+            { className: 'fullWidthContainer text-center' },
+            _react2.default.createElement(
+              'button',
+              { type: 'button', className: 'btn btn-primary', onClick: this.generatePairs.bind(this) },
+              _react2.default.createElement(
+                'h1',
+                null,
+                'GENERATE PAIRS'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'fullWidthContainer text-center' },
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'em',
+                null,
+                'Please Click The Button To Generate Teams'
+              )
+            )
+          ),
+          this.state.mainArr.map(function (pairing) {
+            return _react2.default.createElement(
+              'ul',
+              null,
+              pairing.map(function (coder, i) {
+                return _react2.default.createElement(
+                  'li',
+                  { key: coder.personName },
+                  _react2.default.createElement('img', { className: 'pairedImg', src: [coder.pic] }),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    [coder.personName]
+                  )
+                );
+              })
+            );
+          })
+        )
       );
     }
+
+    // {staticNames.map((person) => (
+    //   <img className="initialImage" src={person.pic} />
+    // ))}
+
+
   }]);
 
   return InputNames;

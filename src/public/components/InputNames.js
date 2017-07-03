@@ -33,27 +33,24 @@ class InputNames extends React.Component {
         {personName:"Mike", pic:"img/mike.jpeg"},
         {personName:"Nani", pic:"img/nani.png"} ],
       pairArr: [],
-      mainArr: []
+      mainArr: [],
+      bkgdArr: []
     };
   }
 
-  // handleChange(event) {
-  //   const name = event.target.value;
-  //   this.setState({
-  //     name:name
-  //   });
-  // };
+  componentDidMount() {
+    this.repeatingBkgd();
+  }
 
-  // handleSubmit(event) {
-  //   event.preventDefault();
-  //
-  //   this.state.allNames.push(this.state.name);
-  //   this.setState({
-  //     allNames:this.state.allNames
-  //   });
-  // };
-
-
+  repeatingBkgd() {
+    for (var i = 0; i < 50; i++) {
+      let randNum = Math.floor((Math.random() * this.state.allNames.length) + 0);
+      this.state.bkgdArr.push(staticNames[randNum].pic);
+    }
+    this.setState({
+      bkgdArr:this.state.bkgdArr
+    })
+  }
 
   generatePairs(event) {
     for (var i = 0; i <= this.state.allNames.length; i++) {
@@ -73,24 +70,37 @@ class InputNames extends React.Component {
 
   render() {
     return (
-      <div>
-        {staticNames.map((person) => (
-          <img className="initialImage" src={person.pic} />
-        ))}
-        <button type="button" onClick={this.generatePairs.bind(this)}>GENERATE PAIRS</button>
-        <h2>Pairs Generated</h2>
-        {this.state.mainArr.map((pairing) => (
-          <ul>
-          {pairing.map((coder, i) => (
-            <li key={coder.personName}><img className="pairedImg" src={[coder.pic]} /><p>{[coder.personName]}</p></li>
+      <div className="generatorPageContainer">
+
+        <div className="backgroundGrid">
+          {this.state.bkgdArr.map((person) => (
+            <img className="grayImg" src={person} />
           ))}
-          </ul>
-        ))}
+        </div>
+
+        <div className="generator">
+          <div className="fullWidthContainer text-center">
+            <button type="button" className="btn btn-primary" onClick={this.generatePairs.bind(this)}><h1>GENERATE PAIRS</h1></button>
+          </div>
+          <div className="fullWidthContainer text-center">
+            <p><em>Please Click The Button To Generate Teams</em></p>
+          </div>
+          {this.state.mainArr.map((pairing) => (
+            <ul>
+            {pairing.map((coder, i) => (
+              <li key={coder.personName}><img className="pairedImg" src={[coder.pic]} /><p>{[coder.personName]}</p></li>
+            ))}
+            </ul>
+          ))}
+        </div>
+
       </div>
     );
   }
 
-
+  // {staticNames.map((person) => (
+  //   <img className="initialImage" src={person.pic} />
+  // ))}
 
 
 
