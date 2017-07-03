@@ -43,16 +43,17 @@ class InputNames extends React.Component {
 
 
   generatePairs(event) {
-    for (var i = 0; i < this.state.mainArr.length; i++) {
-      let randNum = Math.floor((Math.random() * this.state.allNames.length) + 0);
-
+    for (var i = 0; i <= this.state.allNames.length; i++) {
       let pairArr = [];
       for (var j = 0; j < 2; j++) {
+        let randNum = Math.floor((Math.random() * this.state.allNames.length) + 0);
         pairArr.push(this.state.allNames[randNum]);
         this.state.allNames.splice(randNum, 1);
       }
       this.state.mainArr.push(pairArr);
     }
+    this.state.mainArr.push(this.state.allNames);
+    this.state.allNames.splice(0, this.state.allNames.length);
     this.setState({
       mainArr:this.state.mainArr
     });
@@ -69,7 +70,7 @@ class InputNames extends React.Component {
         {this.state.mainArr.map((pairing) => (
           <ul>
           {pairing.map((coder, i) => (
-            <li key={coder.personName}><img className="pairedImg" src={[coder.pic]} /><p>{coder.personName}</p></li>
+            <li key={coder.personName}><img className="pairedImg" src={[coder.pic]} /><p>{[coder.personName]}</p></li>
           ))}
           </ul>
         ))}

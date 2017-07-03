@@ -9609,16 +9609,17 @@ var InputNames = function (_React$Component) {
   _createClass(InputNames, [{
     key: 'generatePairs',
     value: function generatePairs(event) {
-      for (var i = 0; i < this.state.mainArr.length; i++) {
-        var randNum = Math.floor(Math.random() * this.state.allNames.length + 0);
-
+      for (var i = 0; i <= this.state.allNames.length; i++) {
         var pairArr = [];
         for (var j = 0; j < 2; j++) {
+          var randNum = Math.floor(Math.random() * this.state.allNames.length + 0);
           pairArr.push(this.state.allNames[randNum]);
           this.state.allNames.splice(randNum, 1);
         }
         this.state.mainArr.push(pairArr);
       }
+      this.state.mainArr.push(this.state.allNames);
+      this.state.allNames.splice(0, this.state.allNames.length);
       this.setState({
         mainArr: this.state.mainArr
       });
@@ -9654,7 +9655,7 @@ var InputNames = function (_React$Component) {
                 _react2.default.createElement(
                   'p',
                   null,
-                  coder.personName
+                  [coder.personName]
                 )
               );
             })
