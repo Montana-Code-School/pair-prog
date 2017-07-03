@@ -85,6 +85,7 @@ class InputNames extends React.Component {
           <div className="fullWidthContainer text-center">
             <p><em>Please Click The Button To Generate Teams</em></p>
           </div>
+          <div className="returnedPairs">
           {this.state.mainArr.map((pairing) => (
             <ul>
             {pairing.map((coder, i) => (
@@ -92,6 +93,7 @@ class InputNames extends React.Component {
             ))}
             </ul>
           ))}
+          </div>
         </div>
 
       </div>

@@ -9667,24 +9667,28 @@ var InputNames = function (_React$Component) {
               )
             )
           ),
-          this.state.mainArr.map(function (pairing) {
-            return _react2.default.createElement(
-              'ul',
-              null,
-              pairing.map(function (coder, i) {
-                return _react2.default.createElement(
-                  'li',
-                  { key: coder.personName },
-                  _react2.default.createElement('img', { className: 'pairedImg', src: [coder.pic] }),
-                  _react2.default.createElement(
-                    'p',
-                    null,
-                    [coder.personName]
-                  )
-                );
-              })
-            );
-          })
+          _react2.default.createElement(
+            'div',
+            { className: 'returnedPairs' },
+            this.state.mainArr.map(function (pairing) {
+              return _react2.default.createElement(
+                'ul',
+                null,
+                pairing.map(function (coder, i) {
+                  return _react2.default.createElement(
+                    'li',
+                    { key: coder.personName },
+                    _react2.default.createElement('img', { className: 'pairedImg', src: [coder.pic] }),
+                    _react2.default.createElement(
+                      'p',
+                      null,
+                      [coder.personName]
+                    )
+                  );
+                })
+              );
+            })
+          )
         )
       );
     }
