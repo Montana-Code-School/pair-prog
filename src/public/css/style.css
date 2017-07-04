@@ -81,12 +81,11 @@ h1 {
   z-index: 100;
   width: 60%;
   position: fixed;
-  top: 15%;
+  top: 10%;
   left: 20%;
   padding: 2em 1em 1em 1em;
   border-radius: 1em;
   box-shadow: 3px 3px 3px tomato;
-
 }
 
 .fullWidthContainer {
