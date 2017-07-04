@@ -9598,6 +9598,14 @@ var InputNames = function (_React$Component) {
       this.repeatingBkgd();
     }
   }, {
+    key: 'grabList',
+    value: function grabList() {
+      console.log("grabbing");
+      this.setState({
+        allNames: [{ personName: "April", pic: "img/april.jpeg" }, { personName: "Brigitta", pic: "img/brigitta.jpeg" }, { personName: "Chadwick", pic: "img/chadwick.jpeg" }, { personName: "David", pic: "img/david.jpeg" }, { personName: "Jennifer", pic: "img/jennifer.jpeg" }, { personName: "Jesse", pic: "img/jesse.jpeg" }, { personName: "John", pic: "img/john.png" }, { personName: "Kashya", pic: "img/kashya.jpeg" }, { personName: "Meredith", pic: "img/meredith.jpeg" }, { personName: "Mike", pic: "img/mike.jpeg" }, { personName: "Nani", pic: "img/nani.png" }]
+      });
+    }
+  }, {
     key: 'repeatingBkgd',
     value: function repeatingBkgd() {
       for (var i = 0; i < 50; i++) {
@@ -9611,6 +9619,9 @@ var InputNames = function (_React$Component) {
   }, {
     key: 'generatePairs',
     value: function generatePairs(event) {
+      this.grabList();
+      this.state.mainArr = [];
+
       for (var i = 0; i <= this.state.allNames.length; i++) {
         var pairArr = [];
         for (var j = 0; j < 2; j++) {

@@ -42,6 +42,24 @@ class InputNames extends React.Component {
     this.repeatingBkgd();
   }
 
+  grabList() {
+    console.log("grabbing");
+    this.setState({
+      allNames: [
+        {personName:"April", pic:"img/april.jpeg"},
+        {personName:"Brigitta", pic:"img/brigitta.jpeg"},
+        {personName:"Chadwick", pic:"img/chadwick.jpeg"},
+        {personName:"David", pic:"img/david.jpeg"},
+        {personName:"Jennifer", pic:"img/jennifer.jpeg"},
+        {personName:"Jesse", pic:"img/jesse.jpeg"},
+        {personName:"John", pic:"img/john.png"},
+        {personName:"Kashya", pic:"img/kashya.jpeg"},
+        {personName:"Meredith", pic:"img/meredith.jpeg"},
+        {personName:"Mike", pic:"img/mike.jpeg"},
+        {personName:"Nani", pic:"img/nani.png"} ]
+    })
+  }
+
   repeatingBkgd() {
     for (var i = 0; i < 50; i++) {
       let randNum = Math.floor((Math.random() * this.state.allNames.length) + 0);
@@ -53,6 +71,9 @@ class InputNames extends React.Component {
   }
 
   generatePairs(event) {
+    this.grabList();
+    this.state.mainArr = [];
+
     for (var i = 0; i <= this.state.allNames.length; i++) {
       let pairArr = [];
       for (var j = 0; j < 2; j++) {
@@ -64,7 +85,7 @@ class InputNames extends React.Component {
     }
     this.state.mainArr.push(this.state.allNames);
     this.setState({
-      mainArr:this.state.mainArr
+      mainArr:this.state.mainArr,
     });
   }
 
