@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/server.js"
+    "dev:client": "webpack --config webpack.config.client.js --watch",
+    "dev:server": "webpack --config webpack.config.server.js --watch",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
