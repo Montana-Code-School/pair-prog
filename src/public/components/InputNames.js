@@ -1,6 +1,7 @@
 import React from 'react';
 import reactDOM from 'react-dom';
 
+// create array of objects for backgroundGrid
 const staticNames = [
   {personName:"April", pic:"img/april.jpeg"},
   {personName:"Brigitta", pic:"img/brigitta.jpeg"},
@@ -20,18 +21,7 @@ class InputNames extends React.Component {
 
     this.state = {
       name: '',
-      allNames: [
-        {personName:"April", pic:"img/april.jpeg"},
-        {personName:"Brigitta", pic:"img/brigitta.jpeg"},
-        {personName:"Chadwick", pic:"img/chadwick.jpeg"},
-        {personName:"David", pic:"img/david.jpeg"},
-        {personName:"Jennifer", pic:"img/jennifer.jpeg"},
-        {personName:"Jesse", pic:"img/jesse.jpeg"},
-        {personName:"John", pic:"img/john.png"},
-        {personName:"Kashya", pic:"img/kashya.jpeg"},
-        {personName:"Meredith", pic:"img/meredith.jpeg"},
-        {personName:"Mike", pic:"img/mike.jpeg"},
-        {personName:"Nani", pic:"img/nani.png"} ],
+      allNames: [],
       pairArr: [],
       mainArr: [],
       bkgdArr: []
@@ -39,12 +29,14 @@ class InputNames extends React.Component {
   }
 
   componentDidMount() {
-    this.repeatingBkgd();
+    this.repeatingBkgd();   // on page load, immediately call repeatingBkgd() so background images generate
+    this.grabList();        // ...and immediately call grabList() so allNames is not empty
   }
 
   grabList() {
-    console.log("grabbing");
-    this.setState({
+    // setState of allNames to this list of objects whenever this function is called
+    // this function will be replaced/altered when user input is offered
+    return this.setState({
       allNames: [
         {personName:"April", pic:"img/april.jpeg"},
         {personName:"Brigitta", pic:"img/brigitta.jpeg"},
@@ -57,12 +49,14 @@ class InputNames extends React.Component {
         {personName:"Meredith", pic:"img/meredith.jpeg"},
         {personName:"Mike", pic:"img/mike.jpeg"},
         {personName:"Nani", pic:"img/nani.png"} ]
-    })
+    });
   }
 
   repeatingBkgd() {
+    // loop through for 50 times and grab a random image each time, size of image can be manipulated in stylesheet
+    // flexbox used to populate rows/columns
     for (var i = 0; i < 50; i++) {
-      let randNum = Math.floor((Math.random() * this.state.allNames.length) + 0);
+      let randNum = Math.floor((Math.random() * staticNames.length) + 0);
       this.state.bkgdArr.push(staticNames[randNum].pic);
     }
     this.setState({
@@ -71,19 +65,19 @@ class InputNames extends React.Component {
   }
 
   generatePairs(event) {
-    this.grabList();
-    this.state.mainArr = [];
+    this.grabList();  //get list of objects (personName and pic)
+    this.state.mainArr = [];  //set mainArr = 0 so pairs can be regenerated EVERY time btn clicked, this array will hold pair arrays
 
-    for (var i = 0; i <= this.state.allNames.length; i++) {
-      let pairArr = [];
-      for (var j = 0; j < 2; j++) {
-        let randNum = Math.floor((Math.random() * this.state.allNames.length) + 0);
-        pairArr.push(this.state.allNames[randNum]);
-        this.state.allNames.splice(randNum, 1);
+    for (var i = 0; i <= this.state.allNames.length; i++) { // loop through allNames grabbed from grabList()
+      let pairArr = [];  //temporary array that will hold two values
+      for (var j = 0; j < 2; j++) {  // loop two times to grab from allNames and place in pairArr
+        let randNum = Math.floor((Math.random() * this.state.allNames.length) + 0);  // create random number
+        pairArr.push(this.state.allNames[randNum]);  // grab random element from allNames and push to pairArr
+        this.state.allNames.splice(randNum, 1);  // splice that same element from allNames so it cannot be selected again
       }
-      this.state.mainArr.push(pairArr);
+      this.state.mainArr.push(pairArr);  // push pairArr into mainArr
     }
-    this.state.mainArr.push(this.state.allNames);
+    this.state.mainArr.push(this.state.allNames);  // push remainder of allNames into mainArr (in the case there are three left)
     this.setState({
       mainArr:this.state.mainArr,
     });
@@ -120,16 +114,6 @@ class InputNames extends React.Component {
       </div>
     );
   }
-
-  // {staticNames.map((person) => (
-  //   <img className="initialImage" src={person.pic} />
-  // ))}
-
-
-
-
-
-
 }
 
 export default InputNames;

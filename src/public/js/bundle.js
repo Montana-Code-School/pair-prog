@@ -9572,6 +9572,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// create array of objects for backgroundGrid
 var staticNames = [{ personName: "April", pic: "img/april.jpeg" }, { personName: "Brigitta", pic: "img/brigitta.jpeg" }, { personName: "Chadwick", pic: "img/chadwick.jpeg" }, { personName: "David", pic: "img/david.jpeg" }, { personName: "Jennifer", pic: "img/jennifer.jpeg" }, { personName: "Jesse", pic: "img/jesse.jpeg" }, { personName: "John", pic: "img/john.png" }, { personName: "Kashya", pic: "img/kashya.jpeg" }, { personName: "Meredith", pic: "img/meredith.jpeg" }, { personName: "Mike", pic: "img/mike.jpeg" }, { personName: "Nani", pic: "img/nani.png" }];
 
 var InputNames = function (_React$Component) {
@@ -9584,7 +9585,7 @@ var InputNames = function (_React$Component) {
 
     _this.state = {
       name: '',
-      allNames: [{ personName: "April", pic: "img/april.jpeg" }, { personName: "Brigitta", pic: "img/brigitta.jpeg" }, { personName: "Chadwick", pic: "img/chadwick.jpeg" }, { personName: "David", pic: "img/david.jpeg" }, { personName: "Jennifer", pic: "img/jennifer.jpeg" }, { personName: "Jesse", pic: "img/jesse.jpeg" }, { personName: "John", pic: "img/john.png" }, { personName: "Kashya", pic: "img/kashya.jpeg" }, { personName: "Meredith", pic: "img/meredith.jpeg" }, { personName: "Mike", pic: "img/mike.jpeg" }, { personName: "Nani", pic: "img/nani.png" }],
+      allNames: [],
       pairArr: [],
       mainArr: [],
       bkgdArr: []
@@ -9595,21 +9596,25 @@ var InputNames = function (_React$Component) {
   _createClass(InputNames, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.repeatingBkgd();
+      this.repeatingBkgd(); // on page load, immediately call repeatingBkgd() so background images generate
+      this.grabList(); // ...and immediately call grabList() so allNames is not empty
     }
   }, {
     key: 'grabList',
     value: function grabList() {
-      console.log("grabbing");
-      this.setState({
+      // setState of allNames to this list of objects whenever this function is called
+      // this function will be replaced/altered when user input is offered
+      return this.setState({
         allNames: [{ personName: "April", pic: "img/april.jpeg" }, { personName: "Brigitta", pic: "img/brigitta.jpeg" }, { personName: "Chadwick", pic: "img/chadwick.jpeg" }, { personName: "David", pic: "img/david.jpeg" }, { personName: "Jennifer", pic: "img/jennifer.jpeg" }, { personName: "Jesse", pic: "img/jesse.jpeg" }, { personName: "John", pic: "img/john.png" }, { personName: "Kashya", pic: "img/kashya.jpeg" }, { personName: "Meredith", pic: "img/meredith.jpeg" }, { personName: "Mike", pic: "img/mike.jpeg" }, { personName: "Nani", pic: "img/nani.png" }]
       });
     }
   }, {
     key: 'repeatingBkgd',
     value: function repeatingBkgd() {
+      // loop through for 50 times and grab a random image each time, size of image can be manipulated in stylesheet
+      // flexbox used to populate rows/columns
       for (var i = 0; i < 50; i++) {
-        var randNum = Math.floor(Math.random() * this.state.allNames.length + 0);
+        var randNum = Math.floor(Math.random() * staticNames.length + 0);
         this.state.bkgdArr.push(staticNames[randNum].pic);
       }
       this.setState({
@@ -9619,19 +9624,21 @@ var InputNames = function (_React$Component) {
   }, {
     key: 'generatePairs',
     value: function generatePairs(event) {
-      this.grabList();
-      this.state.mainArr = [];
+      this.grabList(); //get list of objects (personName and pic)
+      this.state.mainArr = []; //set mainArr = 0 so pairs can be regenerated EVERY time btn clicked, this array will hold pair arrays
 
       for (var i = 0; i <= this.state.allNames.length; i++) {
-        var pairArr = [];
+        // loop through allNames grabbed from grabList()
+        var pairArr = []; //temporary array that will hold two values
         for (var j = 0; j < 2; j++) {
-          var randNum = Math.floor(Math.random() * this.state.allNames.length + 0);
-          pairArr.push(this.state.allNames[randNum]);
-          this.state.allNames.splice(randNum, 1);
+          // loop two times to grab from allNames and place in pairArr
+          var randNum = Math.floor(Math.random() * this.state.allNames.length + 0); // create random number
+          pairArr.push(this.state.allNames[randNum]); // grab random element from allNames and push to pairArr
+          this.state.allNames.splice(randNum, 1); // splice that same element from allNames so it cannot be selected again
         }
-        this.state.mainArr.push(pairArr);
+        this.state.mainArr.push(pairArr); // push pairArr into mainArr
       }
-      this.state.mainArr.push(this.state.allNames);
+      this.state.mainArr.push(this.state.allNames); // push remainder of allNames into mainArr (in the case there are three left)
       this.setState({
         mainArr: this.state.mainArr
       });
@@ -9703,12 +9710,6 @@ var InputNames = function (_React$Component) {
         )
       );
     }
-
-    // {staticNames.map((person) => (
-    //   <img className="initialImage" src={person.pic} />
-    // ))}
-
-
   }]);
 
   return InputNames;
